@@ -5,4 +5,5 @@ module RustInterop
   extend Fiddle::Importer
   dlload "./interop.dll"
   extern "void void_test()"
+  extern "char i8_return_test()"
 end
