@@ -14,3 +14,7 @@ pub extern "C" fn u8_return_test() -> u8 {
 pub extern "C" fn i16_return_test() -> i16 {
 	32768
 }
+#[no_mangle]
+pub extern "C" fn u16_return_test() -> u16 {
+	65536
+}
