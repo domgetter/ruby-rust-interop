@@ -7,4 +7,5 @@ module RustInterop
   extern "void void_test()"
   extern "char i8_return_test()"
   extern "unsigned char u8_return_test()"
+  extern "short i16_return_test()"
 end
