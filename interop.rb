@@ -4,3 +4,4 @@ require_relative 'rust_interop'
 
 RustInterop.void_test
 puts RustInterop.i8_return_test # -128..127
+puts RustInterop.u8_return_test #    0..255
