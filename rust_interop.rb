@@ -9,4 +9,6 @@ module RustInterop
   extern "unsigned char u8_return_test()"
   extern "short i16_return_test()"
   extern "unsigned short u16_return_test()"
+  extern "int i32_return_test()"
+  extern "unsigned int u32_return_test()"
 end
