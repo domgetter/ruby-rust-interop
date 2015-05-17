@@ -39,7 +39,7 @@ pub extern "C" fn i64_return_test() -> i64 {
 }
 #[no_mangle]
 pub extern "C" fn u64_return_test() -> u64 {
-	//this will overflow to 0
+	//this is the largest number literal you can type in Rust without the compiler throwing an error.
 	18446744073709551615
 }
 #[no_mangle]
