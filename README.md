@@ -19,20 +19,24 @@ I hope you enjoy the examples, and don't be afraid to ask me any questions.
 
 You need 3 ingredients to get this working:
 
-1. write a function the right way in Rust (read at the bottom for a common problem on Windows and a simple workaround)
+###Step 1
+
+write a function the right way in Rust (read at the bottom for a common problem on Windows and a simple workaround)
 
 ```rust
 #[no_mangle]
 pub extern "C" fn fn_name() {}
 ```
 
-2. compile that function the right way
+###Step 2
+compile that function the right way
 
 ```
 > rustc my_file.rs --crate-type=dylib
 ```
 
-3. use Fiddle to create a method in Ruby from the C code
+###Step 3
+use Fiddle to create a method in Ruby from the C code
 
 ```ruby
 require 'fiddle'
@@ -44,7 +48,8 @@ module RustFunctions
   extern "void fn_name()"
 end
 ```
-4.  Now you can use RustFunctions.fn_name anywhere in your ruby code!
+###Step 4
+Now you can use RustFunctions.fn_name anywhere in your ruby code!
 
 Of course, to add parameters and return values, you have to know how to translate between Rust's types and C's types.
 
