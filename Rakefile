@@ -1,5 +1,10 @@
 task :build do
-  system 'rustc src/interop.rs --crate-type=dylib'
+  puts "Building dynamic libraries..."
+  if system('rustc src/interop.rs --crate-type=dylib')
+  else
+    puts "\n\tSomething went wrong during compilation.  Please"
+    puts "\tcheck your .rs files for errors.\n"
+  end
 end
 
 task :run do
