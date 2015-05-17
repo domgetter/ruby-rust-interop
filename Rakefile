@@ -1,9 +1,10 @@
 task :build do
-  puts "Building dynamic libraries..."
-  if system('rustc src/interop.rs --crate-type=dylib')
+  puts "\nBuilding dynamic libraries...\n\n"
+  if system('rustc src/interop.rs --crate-type=dylib -A overflowing-literals')
   else
     puts "\n\tSomething went wrong during compilation.  Please"
     puts "\tcheck your .rs files for errors.\n"
+    $totally_bad_global_for_build = false
   end
 end
 
@@ -12,8 +13,11 @@ task :run do
 end
 
 task :build_and_run do
+  $totally_bad_global_for_build = true
   Rake::Task['build'].execute
-  Rake::Task['run'].execute
+  if $totally_bad_global_for_build
+    Rake::Task['run'].execute
+  end
 end
 
 task :default do
