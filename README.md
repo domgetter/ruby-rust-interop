@@ -15,50 +15,61 @@ Ruby's Fiddle library made it super easy, and [Yehuda Katz's blog here](http://b
 
 I hope you enjoy the examples, and don't be afraid to ask me any questions.
 
+## To Be Going On With
+
 You need 3 ingredients to get this working:
 
 1. write a function the right way in Rust (read at the bottom for a common problem on Windows and a simple workaround)
 
-    #[no_mangle]
-    pub extern "C" fn fn_name() {}
+```rust
+#[no_mangle]
+pub extern "C" fn fn_name() {}
+```
 
 2. compile that function the right way
 
-    > rustc my_file.rs --crate-type=dylib
+```
+> rustc my_file.rs --crate-type=dylib
+```
 
-3. use Fiddle to create a method in RUby from the C code
+3. use Fiddle to create a method in Ruby from the C code
 
-    require 'fiddle'
-    require 'fiddle/import'
+```ruby
+require 'fiddle'
+require 'fiddle/import'
 
-    module RustFunctions
-      extend Fiddle::Importer
-      dlload "./my_file.dll"
-      extern "void fn_name()"
-    end
-
+module RustFunctions
+  extend Fiddle::Importer
+  dlload "./my_file.dll"
+  extern "void fn_name()"
+end
+```
 4.  Now you can use RustFunctions.fn_name anywhere in your ruby code!
 
 Of course, to add parameters and return values, you have to know how to translate between Rust's types and C's types.
 
-    #[no_mangle]
-    pub extern "C" fn fn_name(x: i32) -> i32 {
-    	println!("You passed in {}", x);
-    	x + 1
-    }
+```rust
+#[no_mangle]
+pub extern "C" fn fn_name(x: i32) -> i32 {
+	println!("You passed in {}", x);
+	x + 1
+}
+```
 
 Compilation will be the same (you can see why I made a rakefile for that).
 
 And your Fiddle code will require the types:
 
-    require 'fiddle'
-    require 'fiddle/import'
+```ruby
+require 'fiddle'
+require 'fiddle/import'
 
-    module RustFunctions
-      extend Fiddle::Importer
-      dlload "./my_file.dll"
-      extern "int fn_name(int)"
-    end
+module RustFunctions
+  extend Fiddle::Importer
+  dlload "./my_file.dll"
+  extern "int fn_name(int)"
+end
+```
 
  And now, running RustFunctions.fn_name(3) will return 4.  Hooray!
 
